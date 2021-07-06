@@ -43,4 +43,4 @@ console.log(osama);
 }
 
 module.exports=userModel
-seedUser();
+// seedUser();

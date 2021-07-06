@@ -29,7 +29,7 @@ app.get('/authorize',(req,res)=>{
         }
         res.send(user)
     })
-    res.send(token);
+    // res.send(token);
 });
 
 app.listen(process.env.PORT,()=>{

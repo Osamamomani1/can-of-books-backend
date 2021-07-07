@@ -15,5 +15,50 @@ const Usercontrollerfunc=(req,res)=>{
         
     });
 }
+const createBookfunc=(req,res)=>{
+    const{email,namebook,description,status}= req.body;
+    userModel.findOne({email:email}, (error, userData)=>{
+    if(error){
+      res.send(error)  
+    }
+    // let newBook={namebook:namebook,description:description,status:status}
+    userData.book.push({namebook:namebook,description:description,status:status})
+    userData.save();
+    res.send(userData)
+    })
+}
 
-module.exports=Usercontrollerfunc;
+const updateBook=(req,res)=>{
+    const bookIndex = req.params.book_id;
+    const{email,namebook,description,status}= req.body;
+    userModel.findOne({email:email}, (error, userData)=>{
+    if(error){
+      res.send(error)  
+    }
+    userData.book.splice(bookIndex, 1, {namebook:namebook,description:description,status:status});
+    userData.save();
+    res.send(userData);
+        
+    });
+}
+
+const deleteBook=(req,res)=>{
+
+    const bookIndex = req.params.book_id;
+    const{email}= req.query;
+
+    userModel.findOne({ email: email }, (error, userData) => {
+        if (error) {
+            res.send(error)
+        } 
+            userData.book.splice(bookIndex, 1);
+            userData.save();
+            res.send(userData);
+    });
+}
+
+module.exports={Usercontrollerfunc,
+    createBookfunc,
+    updateBook,
+    deleteBook
+}

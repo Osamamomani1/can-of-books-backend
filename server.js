@@ -6,8 +6,14 @@ const mongoose=require('mongoose');
 const jwt=require('jsonwebtoken');
 const jwksClient=require('jwks-rsa');
 require('dotenv').config();
-const Usercontrollerfunc=require('./controller/User.controller');
+const {Usercontrollerfunc,
+    createBookfunc,
+    updateBook,
+    deleteBook,
+}
+=require('./controller/User.controller');
 app.use(cors());
+app.use(express.json());
 
 // let arr = [1,1,2,3]
 
@@ -23,6 +29,9 @@ app.get('/', (req,res)=>{
 // app.get('/cats',catController);
 
 app.get('/books',Usercontrollerfunc);
+app.post('/books',createBookfunc)
+app.put('/books/:book_id',updateBook)
+app.delete('/books/:book_id',deleteBook)
 
 
 

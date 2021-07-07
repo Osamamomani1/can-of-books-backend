@@ -42,5 +42,5 @@ montaser.save();
 console.log(osama);
 }
 
-module.exports=seedUser
-seedUser();
+module.exports=userModel
+// seedUser();
